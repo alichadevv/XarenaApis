@@ -58,116 +58,6 @@ router.get('/removebg', rmbg)
 router.get('/luminai', luminai)
 router.get('/gemini',gemini)
 
-router.get('/ssweb', async (req,res) => {
-  try {
-  const {
-    url,
-    browserWidth,
-    browserHeight,
-    fullPage,
-    deviceScaleFactor,
-    format
-  } = req.query
-  
-  if (!url) {
-    return res.errorJson('Parameter "url" wajib diisi, bego!', 400)
-  }
-  
-  const screenshotPayload = {
-    url: url,
-    browserWidth: browserWidth ? parseInt(browserWidth, 10) : 1280,
-    browserHeight: browserHeight ? parseInt(browserHeight, 10) : 720,
-    fullPage: fullPage ? fullPage === 'true' : false,
-    deviceScaleFactor: deviceScaleFactor ? parseFloat(deviceScaleFactor) : 1,
-    format: format || 'png'
-  }
-  
-  const screenshotApiUrl = 'https://gcp.imagy.app/screenshot/createscreenshot'
-  const screenshotResponse = await axios.post(screenshotApiUrl, screenshotPayload, {
-    headers: {
-      'Content-Type': 'application/json',
-      'User-Agent': 'Mozilla/5.0 (Linux; Android 10; RMX2185 Build/QP1A.190711.020) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.7103.60 Mobile Safari/537.36',
-      'Referer': 'https://imagy.app/full-page-screenshot-taker/'
-    }
-  })
-  
-  const fileUrl = screenshotResponse.data.fileUrl
-  
-  if (!fileUrl) {
-    return res.errorJson('API screenshot-nya pelit, gak ngasih URL file. Brengsek!', 500)
-  }
-  
-  const imageResponse = await axios.get(fileUrl, {
-    responseType: 'stream'
-  })
-  
-  const contentType = imageResponse.headers['content-type']
-  if (contentType) {
-    res.setHeader('Content-Type', contentType)
-  } else {
-    res.setHeader('Content-Type', `image/${screenshotPayload.format}`)
-  }
-  
-  imageResponse.data.pipe(res)
-  
-  imageResponse.data.on('error', (err) => {
-    res.errorJson(`Gagal nyedot gambar stream-nya. Ada apa nih?! ${err.message}`, 500)
-  })
-  
-} catch (e) {
-  if (!res.headersSent) {
-    res.errorJson(`Ada error tolol di prosesnya: ${e.message}`, e.response ? e.response.status : 500)
-  } else {
-    console.error(`Error setelah headers terkirim: ${e.message}`)
-  }
-}
-});
-router.get('/writecream-text2image', async (req,res) => {
-  const prompt = req.query.prompt
-const aspectRatio = req.query.aspect_ratio || '1:1'
-const link = 'writecream.com'
-
-if (!prompt) {
-  return res.errorJson('Mana promptnya? Mau bikin gambar apa sih?', 400)
-}
-
-const apiUrl = `https://1yjs1yldj7.execute-api.us-east-1.amazonaws.com/default/ai_image?prompt=${encodeURIComponent(prompt)}&aspect_ratio=${encodeURIComponent(aspectRatio)}&link=${encodeURIComponent(link)}`
-
-try {
-  const apiResponse = await axios.get(apiUrl, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Linux; Android 10; RMX2185 Build/QP1A.190711.020) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.111 Mobile Safari/537.36',
-      'Referer': apiUrl
-    }
-  })
-  
-  const imageLink = apiResponse.data.image_link
-  
-  if (!imageLink) {
-    return res.errorJson('Duh, link gambarnya nggak ada di respons API. Aneh.', 500)
-  }
-  
-  const imageResponse = await axios.get(imageLink, {
-    responseType: 'stream'
-  })
-  
-  res.setHeader('Content-Type', 'image/jpeg')
-  imageResponse.data.pipe(res)
-  
-} catch (e) {
-  if (e.response && e.response.status) {
-    if (e.response.status >= 400 && e.response.status < 500) {
-      return res.errorJson(`API-nya protes nih, status: ${e.response.status}. Cek lagi deh prompt atau parameternya.`, e.response.status)
-    } else {
-      return res.errorJson(`Duh, gagal nyari link gambarnya nih. Server API-nya lagi ngambek kali, status: ${e.response.status}.`, e.response.status)
-    }
-  } else if (e.request) {
-    return res.errorJson('Permintaan ke API-nya nggak nyampe. Koneksi internet lu kali yang jelek?', 500)
-  } else {
-    return res.errorJson('Ada error aneh pas mau ngambil gambar. Coba lagi aja.', 500)
-  }
-}
-});
 router.get('/jadwal-sholat', async (req, res) => {
   const cityMapping = {
     "aceh barat": "317",
@@ -1534,14 +1424,14 @@ router.get('/anime-search', async (req, res) => {
 Sinopsis:
 ${originalSynopsis}`;
 
-    const geminiResponse = await axios.get(`https://nirkyy.koyeb.app/api/v1/gemini?prompt=${encodeURIComponent(aiPrompt)}`);
+    const geminiResponse = await axios.get(`https://xarena.xydlanlux.biz.id/api/v1/gemini?prompt=${encodeURIComponent(aiPrompt)}`);
     const summarizedSynopsis = geminiResponse.data.data;
 
     const genres = anime.genres.map(genre => genre.name).join(', ');
     const themes = anime.themes.map(theme => theme.name).join(', ');
 
     res.succesJson({
-      thumbnail: `https://nirkyy.koyeb.app/api/v1/image-random?query=${encodeURIComponent(anime.title)}`,
+      thumbnail: `https://xarena.xydlanlux.biz.id/api/v1/image-random?query=${encodeURIComponent(anime.title)}`,
       thumb_original: anime.images.jpg.image_url,
       title: anime.title,
       genre: genres,
