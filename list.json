@@ -16,62 +16,6 @@
   ],
   "fitur": [
     {
-  "nama": "Website Screenshot",
-  "tags": ["Image", "Utility"],
-  "endpoint": "/api/v1/ssweb",
-  "deskripsi": "Mengambil screenshot dari sebuah website berdasarkan URL.",
-  "parameter": [
-    {
-      "params": "url",
-      "example": "https://nirkyy.koyeb.app",
-      "opsional": false
-    },
-    {
-      "params": "browserWidth",
-      "example": "1280",
-      "opsional": true
-    },
-    {
-      "params": "browserHeight",
-      "example": "720",
-      "opsional": true
-    },
-    {
-      "params": "fullPage",
-      "example": "false",
-      "opsional": true
-    },
-    {
-      "params": "deviceScaleFactor",
-      "example": "1",
-      "opsional": true
-    },
-    {
-      "params": "format",
-      "example": "png",
-      "opsional": true
-    }
-  ]
-},
-    {
-  "nama": "Writecream Text to Image",
-  "tags": ["AI", "Image", "Generator"],
-  "endpoint": "/api/v1/writecream-text2image",
-  "deskripsi": "Menghasilkan gambar dari teks menggunakan Writecream API.",
-  "parameter": [
-    {
-      "params": "prompt",
-      "example": "Anime girl holding a sign with a smiling expression, the sign reads NirKyy",
-      "opsional": false
-    },
-    {
-      "params": "aspect_ratio",
-      "example": "1:1",
-      "opsional": true
-    }
-  ]
-},
-    {
   "nama": "Jadwal Sholat",
   "tags": ["Information", "Utility"],
   "endpoint": "/api/v1/jadwal-sholat",
@@ -115,12 +59,12 @@
   "parameter": [
     {
       "params": "search",
-      "example": "Nirkyy berapa sih",
+      "example": "Xydlan berapa sih",
       "opsional": false
     },
     {
       "params": "judul",
-      "example": "Nirkyy Web",
+      "example": "Xydlan Web",
       "opsional": false
     },
     {
@@ -130,7 +74,7 @@
     },
     {
       "params": "thumbnail",
-      "example": "https://nirkyy.koyeb.app/example.jpg",
+      "example": "https://xarena.xydlanlux.biz.id/example.jpg",
       "opsional": false
     }
   ]
@@ -330,7 +274,7 @@
       "parameter": [
         {
           "params": "url",
-          "example": "https://nirkyy.koyeb.app/example.jpg",
+          "example": "https://xarena.xydlanlux.biz.id/example.jpg",
           "opsional": false
         }
       ]
@@ -356,7 +300,7 @@
       "parameter": [
         {
           "params": "text",
-          "example": "Follow channel Nirkyy lah njir",
+          "example": "Follow channel Xydlan lah njir",
           "opsional": false
         },
         {
@@ -425,7 +369,7 @@
         },
         {
           "params": "link",
-          "example": "https://ngl.link/nirkyy1",
+          "example": "https://ngl.link/xydlan1",
           "opsional": false
         }
       ]
@@ -477,7 +421,7 @@
       "parameter": [
         {
           "params": "url",
-          "example": "https://nirkyy.koyeb.app/example.jpg",
+          "example": "https://xarena.xydlanlux.biz.id/example.jpg",
           "opsional": false
         }
       ]
@@ -612,7 +556,7 @@
       "parameter": [
         {
           "params": "url",
-          "example": "https://nirkyy.koyeb.app/example.jpg",
+          "example": "https://xarena.xydlanlux.biz.id/example.jpg",
           "opsional": false
         }
       ]
@@ -651,7 +595,7 @@
       "parameter": [
         {
           "params": "url",
-          "example": "https://nirkyy.koyeb.app/example.jpg",
+          "example": "https://xarena.xydlanlux.biz.id/example.jpg",
           "opsional": false
         }
       ]
@@ -883,7 +827,7 @@
         },
         {
           "params": "background",
-          "example": "https://nirkyy.koyeb.app/example.jpg",
+          "example": "https://xarena.xydlanlux.biz.id/example.jpg",
           "opsional": false
         }
       ]
